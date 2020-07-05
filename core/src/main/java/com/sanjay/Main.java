@@ -21,7 +21,6 @@ public class Main {
 
         // == get game bean
         Game game = context.getBean(Game.class);
-        game.reset();
 
         context.close();
     }

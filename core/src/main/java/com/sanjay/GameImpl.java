@@ -3,6 +3,9 @@ package com.sanjay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class GameImpl implements Game {
     // == Constants ==
     public static final Logger log = LoggerFactory.getLogger(GameImpl.class);
@@ -21,6 +24,23 @@ public class GameImpl implements Game {
         this.numberGenerator = numberGenerator;
     }
 
+    // == init ==
+    @PostConstruct
+    @Override
+    public void reset() {
+        guess = 0;
+        smallest = 0;
+        largest = numberGenerator.getMaxNumber();
+        number = numberGenerator.next();
+        remainingGuesses = guessCount;
+        log.info("Number is {}", number);
+    }
+
+
+    @PreDestroy
+    public void onPreDestroy() {
+        log.info("Before destroying");
+    }
     // == public methods ==
     @Override
     public int getNumber() {
@@ -44,22 +64,13 @@ public class GameImpl implements Game {
 
     @Override
     public int getLargest() {
+        log.info("Largest number is {}", largest);
         return largest;
     }
 
     @Override
     public int getRemainingGuesses() {
         return remainingGuesses;
-    }
-
-    @Override
-    public void reset() {
-        guess = 0;
-        smallest = 0;
-        largest = numberGenerator.getMaxNumber();
-        number = numberGenerator.next();
-        remainingGuesses = guessCount;
-        log.info("Number is {}", number);
     }
 
     @Override
