@@ -14,7 +14,7 @@ public class Main {
         // == get spring context from beans.xml ==
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT_PATH);
         // == get number generator bean
-        NumberGenerator numberGenerator = context.getBean("numberGenerator", NumberGenerator.class);
+        NumberGenerator numberGenerator = context.getBean(NumberGenerator.class);
         // == get next number ==
         int number = numberGenerator.next();
         log.info("Next number is {}", number);
