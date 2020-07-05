@@ -21,6 +21,11 @@ public class Main {
         // == get game bean
         Game game = context.getBean(Game.class);
 
+        // == get message bean
+        MessageGenerator messageGenerator = context.getBean(MessageGenerator.class);
+        log.info("Called main message and it returned : {}", messageGenerator.getMainMessage());
+        log.info("Called result message and it returned : {}", messageGenerator.getResultMessage());
+
         context.close();
     }
 }
