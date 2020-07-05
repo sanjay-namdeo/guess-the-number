@@ -5,6 +5,6 @@
     <bean id="numberGenerator" scope="prototype" class="com.sanjay.NumberGeneratorImpl"/>
 
     <bean id="game" class="com.sanjay.GameImpl">
-        <constructor-arg ref="numberGenerator"/>
+        <property name="numberGenerator" ref="numberGenerator"/>
     </bean>
 </beans>
