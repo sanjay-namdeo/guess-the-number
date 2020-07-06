@@ -1,7 +1,9 @@
 package com.sanjay;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,22 +11,27 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
+@Slf4j
+@Getter
 public class GameImpl implements Game {
-    // == Constants ==
-    public static final Logger log = LoggerFactory.getLogger(GameImpl.class);
-
     // == private fields ==
-    @Autowired
+    @Getter(AccessLevel.NONE)
     private NumberGenerator numberGenerator;
 
-    @Autowired
     private int guessCount;
     private int number;
+    @Setter
     private int guess;
     private int smallest;
     private int largest;
     private int remainingGuesses;
     private boolean validNumberRange = true;
+
+    @Autowired
+    public GameImpl(NumberGenerator numberGenerator, int guessCount) {
+        this.numberGenerator = numberGenerator;
+        this.guessCount = guessCount;
+    }
 
     // == init ==
     @PostConstruct
@@ -44,35 +51,6 @@ public class GameImpl implements Game {
         log.info("Before destroying");
     }
     // == public methods ==
-    public int getGuessCount() {
-        return guessCount;
-    }
-
-    @Override
-    public int getNumber() {
-        return number;
-    }
-
-    @Override
-    public int getGuess() {
-        return guess;
-    }
-
-    @Override
-    public void setGuess(int guess) {
-        this.guess = guess;
-    }
-
-    @Override
-    public int getSmallest() {
-        return smallest;
-    }
-
-    @Override
-    public int getLargest() {
-        log.info("Largest number is {}", largest);
-        return largest;
-    }
 
     @Override
     public int getRemainingGuesses() {
@@ -92,10 +70,6 @@ public class GameImpl implements Game {
         remainingGuesses--;
     }
 
-    @Override
-    public boolean isValidNumberRange() {
-        return validNumberRange;
-    }
 
     @Override
     public boolean isGameWon() {
