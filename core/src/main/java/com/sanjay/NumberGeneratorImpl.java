@@ -9,12 +9,15 @@ import java.util.Random;
 public class NumberGeneratorImpl implements NumberGenerator {
     // Private fields
     private final Random random = new Random();
-    @Autowired
-    private int maxNumber;
+    private final int maxNumber;
+
+    private final int minNumber;
 
     @Autowired
-    @MinNumber
-    private int minNumber;
+    public NumberGeneratorImpl(@MinNumber int minNumber, int maxNumber) {
+        this.minNumber = minNumber;
+        this.maxNumber = maxNumber;
+    }
 
     // public methods
     @Override
