@@ -1,5 +1,6 @@
 package com.sanjay.config;
 
+import com.sanjay.MinNumber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,9 @@ public class GameConfig {
     @Value("${game.maxNumber:5}")
     private int maxNumber;
 
+    @Value("${game.minNumber}")
+    private int minNumber;
+
     @Bean
     public int guessCount() {
         return guessCount;
@@ -22,4 +26,8 @@ public class GameConfig {
     public int maxNumber() {
         return maxNumber;
     }
+
+    @Bean
+    @MinNumber
+    public int minNumbers() { return minNumber; }
 }
