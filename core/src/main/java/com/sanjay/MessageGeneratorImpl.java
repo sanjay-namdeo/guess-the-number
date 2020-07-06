@@ -11,8 +11,12 @@ import javax.annotation.PostConstruct;
 public class MessageGeneratorImpl implements MessageGenerator {
     public static final Logger log = LoggerFactory.getLogger(MessageGeneratorImpl.class);
 
+    private final Game game;
+
     @Autowired
-    private Game game;
+    public MessageGeneratorImpl(Game game) {
+        this.game = game;
+    }
 
     @Override
     public String getMainMessage() {

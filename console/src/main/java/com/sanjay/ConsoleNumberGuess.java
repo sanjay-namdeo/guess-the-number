@@ -13,11 +13,15 @@ import java.util.Scanner;
 public class ConsoleNumberGuess {
     public static final Logger log = LoggerFactory.getLogger(ConsoleNumberGuess.class);
 
-    @Autowired
-    private Game game;
+    private final Game game;
+
+    private final MessageGenerator messageGenerator;
 
     @Autowired
-    private MessageGenerator messageGenerator;
+    public ConsoleNumberGuess(final Game game, final MessageGenerator messageGenerator) {
+        this.game = game;
+        this.messageGenerator = messageGenerator;
+    }
 
     // This method will be called whenever context refreshes
     @EventListener(ContextRefreshedEvent.class)
